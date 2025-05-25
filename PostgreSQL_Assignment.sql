@@ -46,18 +46,23 @@ INSERT INTO sightings (sighting_id, species_id, ranger_id, location, sighting_ti
 
 SELECT setval('rangers_ranger_id_seq', (SELECT MAX(ranger_id) FROM rangers));
 
-insert into rangers(name,region) values('Derek Fox','Coastal Plains');--Problem 1
+insert into rangers(name,region) --Problem 1
+values('Derek Fox','Coastal Plains');
 
 
-select count(distinct species_id) as unique_species_count from sightings ;--Problem 2
+select count(distinct species_id) as unique_species_count --Problem 2
+from sightings ;
 
-select sighting_id,species_id,ranger_id,location,sighting_time,notes from sightings where location like('%Pass%');--Problem 3
+select sighting_id,species_id,ranger_id,location,sighting_time,notes --Problem 3
+from sightings where location like('%Pass%');
 
-select rangers.name, count(sightings.ranger_id) as total_sightings from sightings--Problem 4
+select rangers.name, count(sightings.ranger_id) as total_sightings --Problem 4
+from sightings
 left join rangers on rangers.ranger_id=sightings.ranger_id
 group by rangers.name;
 
-select species.common_name from species--Problem 5
+select species.common_name --Problem 5
+from species
 left join
 sightings on species.species_id=sightings.species_id
 where sightings.species_id is null;
